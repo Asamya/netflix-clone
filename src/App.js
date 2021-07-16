@@ -1,13 +1,24 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 
 const App = () => {
-  /*const fetchData = async () => {
-      const response = await fetch()
-  }*/
-  return (
-   <div>
+  const [ genres, setGenres ] = useState(null)
 
-   </div>
+  const fetchData = async () => {
+      const response = await fetch("/.netlify/functions/getGenres")
+      const responseBody = await response.json();
+      console.log(responseBody)
+      setGenres(responseBody.data.reference_list.values)
+  }
+
+  useEffect(() => {
+      fetchData()
+  }, [])
+    
+  return (
+   <>
+
+   </>
   );
 }
 
